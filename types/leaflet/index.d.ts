@@ -202,7 +202,7 @@ export type PointExpression = Point | PointLiteral | PointTuple;
 
 export function point(x: number, y: number, round?: boolean): Point;
 
-export function point(coords: PointTuple | {x: number, y: number}): Point;
+export function point(coords: PointTuple | PointLiteral): Point;
 
 export type BoundsLiteral = [PointTuple, PointTuple];
 
