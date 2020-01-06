@@ -74,14 +74,14 @@ export namespace DomUtil {
 }
 
 export interface CRS {
-    latLngToPoint(latlng: LatLngExpression, zoom: number): Point;
-    pointToLatLng(point: PointExpression, zoom: number): LatLng;
+    latLngToPoint(latlng: LatLng | LatLngLiteral, zoom: number): Point;
+    pointToLatLng(point: Point | PointLiteral, zoom: number): LatLng;
     project(latlng: LatLng | LatLngLiteral): Point;
-    unproject(point: PointExpression): LatLng;
+    unproject(point: Point | PointLiteral): LatLng;
     scale(zoom: number): number;
     zoom(scale: number): number;
     getProjectedBounds(zoom: number): Bounds;
-    distance(latlng1: LatLngExpression, latlng2: LatLngExpression): number;
+    distance(latlng1: LatLng | LatLngLiteral, latlng2: LatLng | LatLngLiteral): number;
     wrapLatLng(latlng: LatLng | LatLngLiteral): LatLng;
 
     code?: string;
@@ -100,7 +100,7 @@ export namespace CRS {
 
 export interface Projection {
     project(latlng: LatLng | LatLngLiteral): Point;
-    unproject(point: PointExpression): LatLng;
+    unproject(point: Point | PointLiteral): LatLng;
 
     bounds: Bounds;
 }
@@ -167,6 +167,11 @@ export function latLngBounds(southWest: LatLngExpression, northEast: LatLngExpre
 
 export function latLngBounds(latlngs: LatLngExpression[]): LatLngBounds;
 
+export interface PointLiteral {
+    x: number;
+    y: number;
+}
+
 export type PointTuple = [number, number];
 
 export class Point {
@@ -193,7 +198,7 @@ export interface Coords extends Point {
     z: number;
 }
 
-export type PointExpression = Point | PointTuple;
+export type PointExpression = Point | PointLiteral | PointTuple;
 
 export function point(x: number, y: number, round?: boolean): Point;
 
